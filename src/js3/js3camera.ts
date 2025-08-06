@@ -4,11 +4,11 @@ import { None } from "ts-results-es";
 import { OrthographicCamera } from "three";
 
 export namespace JS3Camera {
-    export function fromOrthographicProjection(win_w: number, win_h: number): Option<OrthographicCamera> {
+    export function fromOrthographicProjection(width: number, height: number): Option<OrthographicCamera> {
         try {
             const camera = new OrthographicCamera(
-                0, win_w,
-                0, win_h,
+                0, width,
+                0, height,
                 0.1, 
                 1000
             );

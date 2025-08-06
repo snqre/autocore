@@ -16,7 +16,7 @@ export namespace Pole {
         const y = configuration.y ?? 0;
         const w = configuration.w ?? 3;
         const h = configuration.h ?? 100;
-        return Rect.from_buffer_geometry_and_basic_line_material({
+        return Rect.fromBufferGeometryAndBasicLineMaterial({
             x,
             y,
             w,

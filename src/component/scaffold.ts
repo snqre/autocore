@@ -1,7 +1,6 @@
 import { Vector3, Group, BufferGeometry, Line, LineBasicMaterial } from "three";
 
 export namespace Scaffold {
-    
     export type Configuration = {
         bayCount?: number;
         liftCount?: number;

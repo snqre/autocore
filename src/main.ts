@@ -1,12 +1,17 @@
 import { Some } from "ts-results-es";
 import { None } from "ts-results-es";
 import { JS3SketchLauncher } from "./js3";
+import { ZigZagLine } from "./component";
+import { Text } from "./component/text";
 
 (await JS3SketchLauncher.renderAsync(async node => {
     try {
-        node.scene.position.x = 0;
-        node.scene.position.y = 0;
-
+        const demoLine = (await Text.from("Some important text")).unwrap();
+        
+        node.scene.position.x = 200;
+        node.scene.position.y = 200;
+        node.scene.add(demoLine);
+        
         return Some(() => {
             
         });

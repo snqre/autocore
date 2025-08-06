@@ -39,6 +39,7 @@ export namespace JS3CoreLauncher {
                     return ok(None);
                 }
                 const webgl = webglO.safeUnwrap();
+                document.body.appendChild(webgl.domElement);
                 const onAnimationFrameO = await onAsyncRender({ webgl, scene, camera });
                 if (onAnimationFrameO.isNone()) {
                     return ok(None);
