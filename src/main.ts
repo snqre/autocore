@@ -6,7 +6,9 @@ import { Text } from "./component/text";
 
 (await JS3SketchLauncher.renderAsync(async node => {
     try {
-        const demoLine = (await Text.from("Some important text")).unwrap();
+        const demoLine = (await Text.from("s666vss sssss h(200m, 48m)", {
+            origin: "left"
+        })).unwrap();
         
         node.scene.position.x = 200;
         node.scene.position.y = 200;
