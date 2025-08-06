@@ -1,9 +1,9 @@
+import { Option } from "ts-results-es";
 import { Group } from "three";
 import { Color } from "three";
 import { Rect } from "./rect";
 
 export namespace Pole {
-
     export type Configuration = {
         x?: number,
         y?: number,
@@ -11,7 +11,7 @@ export namespace Pole {
         h?: number
     };
 
-    export function from(configuration: Configuration): Group {
+    export function from(configuration: Configuration): Option<Group> {
         const x = configuration.x ?? 0;
         const y = configuration.y ?? 0;
         const w = configuration.w ?? 3;
