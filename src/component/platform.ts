@@ -33,7 +33,7 @@ export namespace Platform {
         const g = new Group();
         g.add(top_line);
         g.add(bottom_line);
-        g.add(ZigZagLine.from_buffer_geometry_and_basic_line_material({
+        g.add(ZigZagLine.fromBufferGeometryAndBasicLineMaterial({
             x: 0,
             y: c.h / 2,
             length: c.w,
