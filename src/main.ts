@@ -3,10 +3,17 @@ import { JS3Win } from "./js3";
 import { Coordinate, Pole, Scaffold } from "./component";
 import { Platform } from "./component/platform";
 import { Color, Vector3 } from "three";
+import { Text } from "./component/text";
+
+
 
 JS3SketchLauncher.render(c => {
     c.scene.position.x = 0;
     c.scene.position.y = 0;
+
+    const someTextO = Text.from("Hello World", {
+        size: 16
+    });
 
     const s = Coordinate.from(Pole.from({
         y: 400
