@@ -1,13 +1,53 @@
+import { Option } from "ts-results-es";
+import { Some } from "ts-results-es";
+import { None } from "ts-results-es";
 import { Group } from "three";
+import { Vector3 } from "three";
+import { Polygon } from "./polygon";
+import { Text } from "./text";
 
 export namespace Floor {
-
     export type Configuration = {
         y?: number
     };
 
-    export function from(configuration: Configuration): Group {
+    export function from(configuration: Configuration): Option<Group> {
+        const windowWidth = window.innerWidth;
         const y = configuration.y ?? 0;
-        
+        const lineO = Polygon.fromBufferGeometryAndBasicLineMaterial({
+            points: [
+                new Vector3(0, y),
+                new Vector3(windowWidth, y)
+            ]
+        });
+        if (lineO.isNone()) {
+            return None;
+        }
+        const line = lineO.safeUnwrap();
+        const coordinateAR = Text.from(`(0m, ${y}m)`, {
+            origin: "left",
+            size: 50
+        });
+        if (coordinateAR.isErr()) {
+            return None;
+        }
+        const coordinateA = coordinateAR.safeUnwrap();
+        coordinateA.position.x = 0;
+        coordinateA.position.y = y + 25;
+        const coordinateBR = Text.from(`(${windowWidth}m, ${y}m)`, {
+            origin: "right",
+            size: 50
+        });
+        if (coordinateBR.isErr()) {
+            return None;
+        }
+        const coordinateB = coordinateBR.safeUnwrap();
+        coordinateB.position.x = windowWidth;
+        coordinateB.position.y = y + 25;
+        const group = new Group();
+        group.add(line);
+        group.add(coordinateA);
+        group.add(coordinateB);
+        return Some(group);
     }
 }

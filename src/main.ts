@@ -3,19 +3,17 @@ import { None } from "ts-results-es";
 import { JS3SketchLauncher } from "./js3";
 import { ZigZagLine } from "./component";
 import { Text } from "./component/text";
+import { Floor } from "./component";
 
 (await JS3SketchLauncher.renderAsync(async node => {
     try {
-        
-        const demoLine = Text.from("s666vss sssss h(200m, 48m)", {
-            origin: "left",
-            size: 30
+        const floor = Floor.from({
+            y: 500
         }).unwrap();
         
-        node.scene.position.x = 200;
-        node.scene.position.y = 200;
-        node.scene.add(demoLine);
-        
+        node.scene.add(floor);
+
+
         return Some(() => {
             
         });
