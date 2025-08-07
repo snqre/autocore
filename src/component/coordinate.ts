@@ -12,9 +12,9 @@ export namespace Coordinate {
         size?: number
     };
 
-    export function from(children: Group, configuration?: Configuration): Group {
-        const x = children.position.x;
-        const y = children.position.y;
+    export function appendCoordinate(child: Group, configuration?: Configuration): Group {
+        const x = child.position.x;
+        const y = child.position.y;
         const label = `(${x}, ${y})`;
 
         const offsetX = configuration?.offset_x ?? 0;
@@ -50,7 +50,7 @@ export namespace Coordinate {
         sprite.position.set(x + offsetX, y + offsetY, 0.1);
 
         const g = new Group();
-        g.add(children);
+        g.add(child);
         g.add(sprite);
 
         return g;

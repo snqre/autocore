@@ -3,6 +3,7 @@ import { Some } from "ts-results-es";
 import { None } from "ts-results-es";
 import { Group } from "three";
 import { Vector3 } from "three";
+import { JS3Node } from "../js3";
 import { Polygon } from "./polygon";
 import { Text } from "./text";
 
@@ -32,8 +33,8 @@ export namespace Floor {
             return None;
         }
         const coordinateA = coordinateAR.safeUnwrap();
-        coordinateA.position.x = 0;
-        coordinateA.position.y = y + 25;
+        coordinateA.position.x = JS3Node.bottom_left_pos_x_of(line);
+        coordinateA.position.y = JS3Node.bottom_left_pos_y_of(line) + 25;
         const coordinateBR = Text.from(`(${windowWidth}m, ${y}m)`, {
             origin: "right",
             size: 50

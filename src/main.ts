@@ -1,29 +1,19 @@
 import { Some } from "ts-results-es";
 import { None } from "ts-results-es";
-import { JS3SketchLauncher } from "./js3";
+import { JS3CoreLauncher } from "./js3";
 import { ZigZagLine } from "./component";
 import { Text } from "./component/text";
 import { Floor } from "./component";
 
-(await JS3SketchLauncher.renderAsync(async node => {
-    try {
-        const floor = Floor.from({
-            y: 500
-        }).unwrap();
-        
-        node.scene.add(floor);
+JS3CoreLauncher.render(e => {
+    const x = Floor.from({ y: 200 }).unwrap();
 
 
-        return Some(() => {
-            
-        });
-    } catch {
-        return None;
+
+    return () => {
+
     }
-})).unwrap();
-
-
-
+});
 
 // impalcati - deck or platform
 // scale - stair/ladder
