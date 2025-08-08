@@ -32,7 +32,7 @@ export namespace Platform {
                 new Vector3(w, h)
             ]);
             const bottomLine = new Line(bottomLineGeometry, material);
-            const fillerPatternO = ZigZagLine.fromBufferGeometryAndBasicLineMaterial({
+            const fillerPatternO = ZigZagLine.from_buffer_geometry_and_basic_line_material({
                 x: 0,
                 y: h / 2,
                 length: w,

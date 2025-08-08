@@ -1,11 +1,11 @@
 import { JS3CoreLauncher } from "./js3";
 import { Text } from "./component/text";
+import { Pole, Rect } from "./component";
 
 JS3CoreLauncher.render_image(({ scene: s }) => {
-    s.add(Text.from("My name is steve", {
-        x: 0,
-        y: 0,
-        size: 200
+    s.add(Pole.from({
+        w: 100,
+        h: 100
     }));
 
     return [() => {

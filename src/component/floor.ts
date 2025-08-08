@@ -8,6 +8,7 @@ import { Polygon } from "./polygon";
 import { Text } from "./text";
 
 export namespace Floor {
+    
     export type Configuration = {
         y?: number
     };
@@ -15,7 +16,7 @@ export namespace Floor {
     export function from(configuration: Configuration): Option<Group> {
         const windowWidth = window.innerWidth;
         const y = configuration.y ?? 0;
-        const lineO = Polygon.fromBufferGeometryAndBasicLineMaterial({
+        const lineO = Polygon.from_buffer_geometry_and_basic_line_material({
             points: [
                 new Vector3(0, y),
                 new Vector3(windowWidth, y)

@@ -1,6 +1,3 @@
-import { Option } from "ts-results-es";
-import { Some } from "ts-results-es";
-import { None } from "ts-results-es";
 import { BufferGeometry } from "three";
 import { Color } from "three";
 import { Group } from "three";
@@ -11,8 +8,10 @@ import { Mesh } from "three";
 import { MeshBasicMaterial } from "three";
 import { ShapeGeometry } from "three";
 import { Shape } from "three";
+import { require } from "../support";
 
 export namespace Polygon {
+    
     export type Configuration = {
         points: Array<Vector3>,
         x?: number,
@@ -20,75 +19,49 @@ export namespace Polygon {
         color?: Color
     };
 
-    export function fromShapeGeometryAndBasicMeshMaterial(configuration: Configuration): Option<Group> {
-        try {
-            const points = configuration.points;
-            const x = configuration.x ?? 0;
-            const y = configuration.y ?? 0;
-            const color = configuration.color ?? new Color(0x202020);
-            const shape = new Shape();
-            const first = points.at(0);
-            if (first === undefined) {
-                return None;
-            }
-            const first_x = first.x;
-            const first_y = first.y;
-            shape.moveTo(first_x, first_y);
-            for (let i = 1; i < points.length; i++) {
-                const point = points.at(i);
-                if (point === undefined) {
-                    return None;
-                }
-                const point_x = point.x;
-                const point_y = point.y;
-                shape.lineTo(point_x, point_y);
-            }
-            const geometry = new ShapeGeometry(shape);
-            const material = new MeshBasicMaterial({
-                color,
-                side: 2
-            });
-            const mesh = new Mesh(geometry, material);
-            const group = new Group();
-            group.position.x = x;
-            group.position.y = y;
-            group.add(mesh);
-            return Some(group);
-        } catch {
-            return None;
+    export function from_shape_geometry_and_basic_mesh_material(cfg: Configuration): Group {
+        cfg.x ??= 0;
+        cfg.y ??= 0;
+        cfg.color ??= new Color(0x202020);
+        const shape = new Shape();
+        const first = cfg.points.at(0);
+        require(!!first);
+        shape.moveTo(first.x, first.y);
+        for (let i = 1; i < cfg.points.length; i++) {
+            const point = cfg.points.at(i);
+            require(!!point);
+            shape.lineTo(point.x, point.y);
         }
+        const color = cfg.color;
+        const geometry = new ShapeGeometry(shape);
+        const material = new MeshBasicMaterial({ color, side: 2 });
+        const mesh = new Mesh(geometry, material);
+        const g = new Group();
+        g.position.x = cfg.x;
+        g.position.y = cfg.y;
+        return g.add(mesh);
     }
 
-    export function fromBufferGeometryAndBasicLineMaterial(configuration: Configuration): Option<Group> {
-        try {
-            const points = configuration.points;
-            const x = configuration.x ?? 0;
-            const y = configuration.y ?? 0;
-            const color = configuration.color ?? new Color(0x202020);
-            const first = points.at(0);
-            if (first === undefined) {
-                return None;
-            }
-            const last = points.at(points.length - 1);
-            if (last === undefined) {
-                return None;
-            }
-            if (!first.equals(last)) {
-                const first_clone = first.clone();
-                points.push(first_clone);
-            }
-            const material = new LineBasicMaterial({
-                color
-            });
-            const geometry = new BufferGeometry().setFromPoints(points);
-            const line = new Line(geometry, material);
-            const group = new Group();
-            group.position.x = x;
-            group.position.y = y;
-            group.add(line);
-            return Some(group);
-        } catch {
-            return None;
+    export function from_buffer_geometry_and_basic_line_material(cfg: Configuration): Group {
+        const points = cfg.points;
+        cfg.x ??= 0;
+        cfg.y ??= 0;
+        cfg.color ??= new Color(0x202020);
+        const first = points.at(0);
+        require(!!first);
+        const last = points.at(points.length - 1);
+        require(!!last);
+        if (!first.equals(last)) {
+            const first_clone = first.clone();
+            points.push(first_clone);
         }
+        const color = cfg.color;
+        const material = new LineBasicMaterial({ color });
+        const geometry = new BufferGeometry().setFromPoints(points);
+        const line = new Line(geometry, material);
+        const g = new Group();
+        g.position.x = cfg.x;
+        g.position.y = cfg.y;
+        return g.add(line);
     }
 }
