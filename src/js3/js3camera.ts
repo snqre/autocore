@@ -13,7 +13,7 @@ export namespace JS3Camera {
 
     export function from(min_distance?: number, max_distance?: number): JS3Camera {
         min_distance ??= 1;
-        max_distance ??= 1000;
+        max_distance ??= 2500;
         require(max_distance >= 0);
         require(min_distance >= 0);
         require(min_distance < max_distance);
@@ -41,7 +41,7 @@ export namespace JS3Camera {
             child.updateProjectionMatrix();
         };
 
-        const update_pos_z = () => child.position.z = m_max_distance();
+        const update_pos_z = () => child.position.z = m_max_distance() / 2;
         const update_aspect = () => {
             const win_w = window.innerWidth;
             const win_h = window.innerHeight;

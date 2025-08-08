@@ -3,6 +3,8 @@ import { Text } from "./component/text";
 
 JS3CoreLauncher.render_image(({ scene: s }) => {
     s.add(Text.from("My name is steve", {
+        x: 0,
+        y: 0,
         size: 200
     }));
 
@@ -10,9 +12,9 @@ JS3CoreLauncher.render_image(({ scene: s }) => {
 
     }, [
         JS3CoreLauncher.enable_core,
-        //JS3CoreLauncher.enable_responsive_resize,
-        //JS3CoreLauncher.enable_zooming,
-        //JS3CoreLauncher.enable_panning
+        JS3CoreLauncher.enable_responsive_resize,
+        JS3CoreLauncher.enable_zoom,
+        //JS3CoreLauncher.enable_grid
     ]];
 });
 

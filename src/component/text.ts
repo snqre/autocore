@@ -16,6 +16,8 @@ export namespace Text {
         | "right";
 
     export type Configuration = {
+        x?: number,
+        y?: number,
         size?: number,
         reso?: number,
         origin?: Origin,
@@ -24,6 +26,8 @@ export namespace Text {
 
     export function from(s: string, cfg?: Configuration): Group {
         cfg ??= {};
+        cfg.x ??= 0;
+        cfg.y ??= 0;
         cfg.size ??= 100;
         cfg.reso ??= 5;
         cfg.origin ??= "center";
@@ -62,6 +66,8 @@ export namespace Text {
         const geometry = new PlaneGeometry(plane_w, plane_h);
         const material = new MeshBasicMaterial({ map, side, transparent });
         const mesh = new Mesh(geometry, material);
+        mesh.position.x = cfg.x;
+        mesh.position.y = cfg.y;
         switch (origin) {
             case "left":
                 mesh.position.x = plane_w / 2;
