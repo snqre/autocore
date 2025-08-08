@@ -5,6 +5,8 @@ export type JS3Camera = {
     child: PerspectiveCamera,
     min_distance(): number,
     max_distance(): number,
+    set_min_distance(n: number): void,
+    set_max_distance(n: number): void,
     set_fov(n: number): void,
     set_pos_z(n: number): void
 };
@@ -20,6 +22,19 @@ export namespace JS3Camera {
         const child = new PerspectiveCamera(100, 1, min_distance, max_distance);
         const m_max_distance = () => child.far;
         const m_min_distance = () => child.near;
+
+        const m_set_min_distance = (n: number) => {
+            require(n >= 1);
+            require(n <= m_max_distance());
+            child.near = n;
+            child.updateProjectionMatrix();
+        };
+
+        const m_set_max_distance = (n: number) => {
+            require(n >= m_min_distance());
+            child.far = n;
+            child.updateProjectionMatrix();
+        };
 
         const m_set_fov = (n: number) => {
             require(Number.isFinite(n));
@@ -68,6 +83,8 @@ export namespace JS3Camera {
             child,
             min_distance: m_min_distance,
             max_distance: m_max_distance,
+            set_min_distance: m_set_min_distance,
+            set_max_distance: m_set_max_distance,
             set_fov: m_set_fov,
             set_pos_z: m_set_pos_z
         };
