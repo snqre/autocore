@@ -1,5 +1,8 @@
 export function require(condition: boolean, msg?: string): asserts condition {
     if (!condition) {
-        throw new Error(msg);
+        const e = Error(msg);
+        
+        Error.captureStackTrace(e, require);
+        throw e;
     }
 }

@@ -1,18 +1,19 @@
-import { Some } from "ts-results-es";
-import { None } from "ts-results-es";
 import { JS3CoreLauncher } from "./js3";
-import { ZigZagLine } from "./component";
 import { Text } from "./component/text";
-import { Floor } from "./component";
 
-JS3CoreLauncher.render(e => {
-    const x = Floor.from({ y: 200 }).unwrap();
+JS3CoreLauncher.render_image(({ scene: s }) => {
+    s.add(Text.from("My name is steve", {
+        size: 200
+    }));
 
+    return [() => {
 
-
-    return () => {
-
-    }
+    }, [
+        JS3CoreLauncher.enable_core,
+        //JS3CoreLauncher.enable_responsive_resize,
+        //JS3CoreLauncher.enable_zooming,
+        //JS3CoreLauncher.enable_panning
+    ]];
 });
 
 // impalcati - deck or platform
