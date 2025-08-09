@@ -1,28 +1,12 @@
 import { JS3CoreLauncher } from "./js3";
 import { Text } from "./component/text";
-import { Floor, Platform, Pole, Polygon, Rect } from "./component";
+import { Axis, Platform, Pole, Polygon, Rect } from "./component";
 import { Color, Group, Vector3 } from "three";
 import { JS3Node } from "./js3";
 import { Underlift } from "./component/underlift";
 
 JS3CoreLauncher.render_image(({ scene: s }) => {
-    {
-/*         s.add(Pole.from({
-
-        }));
-        s.add(Pole.from({
-            x: 250,
-        }));
-        s.add(Polygon.from_buffer_geometry_and_basic_line_material({
-            y: 40,
-            color: new Color("blue"),
-            points: [
-                new Vector3(50, 450),
-                new Vector3(275, 450)
-            ]
-        })); */
-    }
-
+    
     const scaffold = () => {
         const h = 1600;
         const left_pole = Pole.from({
@@ -135,7 +119,8 @@ JS3CoreLauncher.render_image(({ scene: s }) => {
 
     const g = new Group()
         .add(left_scaffold)
-        .add(right_scaffold);
+        .add(right_scaffold)
+        .add(Axis.from());
 
     g.position.x = -1000;
     g.position.y = -1000;

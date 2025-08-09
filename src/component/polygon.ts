@@ -17,7 +17,8 @@ export namespace Polygon {
         x?: number,
         y?: number,
         angle?: number,
-        color?: Color
+        color?: Color,
+        opacity?: number
     };
 
     export function from_shape_geometry_and_basic_mesh_material(cfg: Configuration): Group {
@@ -25,6 +26,7 @@ export namespace Polygon {
         cfg.y ??= 0;
         cfg.angle ??= 0;
         cfg.color ??= new Color(0x202020);
+        cfg.opacity ??= 1;
         const shape = new Shape();
         const first = cfg.points.at(0);
         require(!!first);
@@ -36,7 +38,12 @@ export namespace Polygon {
         }
         const color = cfg.color;
         const geometry = new ShapeGeometry(shape);
-        const material = new MeshBasicMaterial({ color, side: 2 });
+        const material = new MeshBasicMaterial({
+            color,
+            side: 2,
+            opacity: cfg.opacity,
+            transparent: cfg.opacity < 1
+        });
         const mesh = new Mesh(geometry, material);
         const g = new Group();
         g.position.x = cfg.x;
@@ -50,6 +57,7 @@ export namespace Polygon {
         cfg.y ??= 0;
         cfg.angle ??= 0;
         cfg.color ??= new Color(0x202020);
+        cfg.opacity ??= 1;
         const first = points.at(0);
         require(!!first);
         const last = points.at(points.length - 1);
@@ -59,7 +67,11 @@ export namespace Polygon {
             points.push(first_clone);
         }
         const color = cfg.color;
-        const material = new LineBasicMaterial({ color });
+        const material = new LineBasicMaterial({
+            color,
+            opacity: cfg.opacity,
+            transparent: cfg.opacity < 1
+        });
         const geometry = new BufferGeometry().setFromPoints(points);
         const line = new Line(geometry, material);
         const g = new Group();
