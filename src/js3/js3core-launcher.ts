@@ -37,7 +37,7 @@ export namespace JS3CoreLauncher {
         require(false, "TODO");
     };
 
-    export const enable_zoom: OnImage = ({ webgl: w, camera: c }) => {
+    export const enable_orbit_control: OnImage = ({ webgl: w, camera: c }) => {
         const controller = new OrbitControls(c.child, w.domElement);
         controller.enableZoom = true;
         controller.enablePan = true;

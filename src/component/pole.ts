@@ -4,6 +4,7 @@ import { Rect } from "./rect";
 import { Polygon } from "./polygon";
 
 export namespace Pole {
+    
     export type Configuration = {
         x?: number,
         y?: number,
@@ -15,8 +16,8 @@ export namespace Pole {
         base_h?: number,
     };
 
-    export function from(cfg?: Configuration): Group {
-        cfg = {};
+    export function from(cfg: Configuration): Group {
+        cfg ??= {};
         cfg.x ??= 0;
         cfg.y ??= 0;
         cfg.w ??= 25;
@@ -49,6 +50,8 @@ export namespace Pole {
             color: new Color("blue")
         });
         const g = new Group();
+        g.position.x = cfg.x;
+        g.position.y = cfg.y;
         g.add(base);
         g.add(base_foundation);
         g.add(pole);

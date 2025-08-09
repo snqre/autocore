@@ -16,12 +16,14 @@ export namespace Polygon {
         points: Array<Vector3>,
         x?: number,
         y?: number,
+        angle?: number,
         color?: Color
     };
 
     export function from_shape_geometry_and_basic_mesh_material(cfg: Configuration): Group {
         cfg.x ??= 0;
         cfg.y ??= 0;
+        cfg.angle ??= 0;
         cfg.color ??= new Color(0x202020);
         const shape = new Shape();
         const first = cfg.points.at(0);
@@ -46,6 +48,7 @@ export namespace Polygon {
         const points = cfg.points;
         cfg.x ??= 0;
         cfg.y ??= 0;
+        cfg.angle ??= 0;
         cfg.color ??= new Color(0x202020);
         const first = points.at(0);
         require(!!first);

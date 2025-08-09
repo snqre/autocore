@@ -10,6 +10,7 @@ export namespace Rect {
         y?: number,
         w?: number,
         h?: number,
+        angle?: number,
         color?: Color
     };
 
@@ -19,6 +20,7 @@ export namespace Rect {
         cfg.y ??= 0;
         cfg.w ??= 100;
         cfg.h ??= 100;
+        cfg.angle ??= 0;
         cfg.color ??= new Color(0x202020);
         return Polygon.from_shape_geometry_and_basic_mesh_material({
             x: cfg.x,

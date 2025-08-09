@@ -1,6 +1,3 @@
-import { Option } from "ts-results-es";
-import { Some } from "ts-results-es";
-import { None } from "ts-results-es";
 import { Group } from "three";
 import { Vector3 } from "three";
 import { JS3Node } from "../js3";
