@@ -1,8 +1,7 @@
 import { JS3CoreLauncher } from "./js3";
 import { Text } from "./component/text";
-import { Axis, Platform, Pole, Polygon, Rect } from "./component";
+import { Axis, Rope, Circle, Platform, Pole, Polygon, Rect, Net } from "./component";
 import { Color, Group, Vector3 } from "three";
-import { JS3Node } from "./js3";
 import { Underlift } from "./component/underlift";
 
 JS3CoreLauncher.render_image(({ scene: s }) => {
@@ -81,7 +80,7 @@ JS3CoreLauncher.render_image(({ scene: s }) => {
 
     const intersection_line = () => {
         const line = Rect.from_shape_geometry_and_basic_mesh_material({
-            color: new Color("green"),
+            color: new Color("blue"),
             w: 250,
             h: 5,
             x: 40,
@@ -117,10 +116,38 @@ JS3CoreLauncher.render_image(({ scene: s }) => {
     const right_scaffold = left_scaffold.clone();
     right_scaffold.position.x += 2000;
 
+    const cable = Net.from({
+        area: {
+            top_left: new Vector3(50, 1600),
+            top_right: new Vector3(275, 1600),
+            bottom_left: new Vector3(50, 1200),
+            bottom_right: new Vector3(275, 1200)
+        },
+        tension: 10,
+        row_count: 32,
+        col_count: 0,
+        reso: 32,
+        opacity: 1
+    });
+
+    const cable_to = Net.from({
+        area: {
+            top_left: new Vector3(300, 1600),
+            top_right: new Vector3(2025, 1000),
+            bottom_left: new Vector3(300, 600),
+            bottom_right: new Vector3(2025, 900)
+        },
+        col_count: 0,
+        row_count: 16,
+        tension: 5
+    });
+
     const g = new Group()
         .add(left_scaffold)
         .add(right_scaffold)
-        .add(Axis.from());
+        .add(Axis.from())
+        .add(cable)
+        .add(cable_to);
 
     g.position.x = -1000;
     g.position.y = -1000;
